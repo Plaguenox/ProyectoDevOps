@@ -1,0 +1,8 @@
+playbooks/servidor.yml
+
+- name: Configurar servidor DevOps InnovaSys
+  hosts: innovasys
+  become: true
+  roles:
+    - apache
+    - samba

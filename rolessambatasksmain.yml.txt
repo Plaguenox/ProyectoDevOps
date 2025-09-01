@@ -1,0 +1,44 @@
+roles/samba/tasks/main.yml
+
+- name: Instalar Samba
+  apt:
+    name: samba
+    state: present
+    update_cache: true
+
+- name: Instalar herramientas para smbpasswd
+  apt:
+    name: samba-common-bin
+    state: present
+
+- name: Crear grupo desarrolladores
+  group:
+    name: desarrolladores
+    state: present
+
+- name: Crear usuario devuser1 sin shell
+  user:
+    name: devuser1
+    shell: /usr/sbin/nologin
+    groups: desarrolladores
+    append: yes
+    state: present
+
+- name: Crear carpeta compartida
+  file:
+    path: /srv/samba/proyectos
+    state: directory
+    owner: root
+    group: desarrolladores
+    mode: '0770'
+
+- name: Crear configuración smb.conf desde plantilla
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+  notify: Reiniciar Samba
+
+- name: Establecer contraseña Samba para devuser1
+  shell: echo -e "Innova.2025\nInnova.2025" | /usr/bin/smbpasswd -s -a devuser1
+  args:
+    executable: /bin/bash

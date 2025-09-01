@@ -1,0 +1,15 @@
+roles/samba/templates/smb.conf.j2
+
+[global]
+   workgroup = WORKGROUP
+   security = user
+   map to guest = Bad User
+   server string = Samba Server
+
+[Proyectos]
+   path = /srv/samba/proyectos
+   writable = yes
+   browsable = yes
+   valid users = @desarrolladores
+   create mask = 0770
+   directory mask = 0770

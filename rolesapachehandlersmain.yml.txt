@@ -1,0 +1,6 @@
+roles/apache/handlers/main.yml
+
+- name: Reiniciar Apache
+  service:
+    name: apache2
+    state: restarted

@@ -1,0 +1,13 @@
+roles/apache/templates/index.html.j2
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido a InnovaSys</title>
+</head>
+<body>
+  <h1>Bienvenidos a la Intranet de {{ nombre_empresa }}</h1>
+  <p>Este servidor brinda acceso interno a los servicios clave de la startup.</p>
+</body>
+</html>

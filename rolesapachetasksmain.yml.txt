@@ -1,0 +1,13 @@
+roles/apache/tasks/main.yml
+
+- name: Instalar Apache
+  apt:
+    name: apache2
+    state: present
+    update_cache: true
+
+- name: Crear página de bienvenida
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+  notify: Reiniciar Apache
